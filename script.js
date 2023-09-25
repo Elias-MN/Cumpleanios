@@ -6,8 +6,8 @@ const countdownElement = document.getElementById('countdown-container');
 
 let currentDate = new Date();
 let yearGoal = 2023;
-let monthGoal = 8;
-let dayGoal = 29;
+let monthGoal = 3;
+let dayGoal = 1;
 let hourGoal = 0;
 let goalDate = new Date(yearGoal, monthGoal, dayGoal, hourGoal);
 
@@ -108,32 +108,7 @@ function soltarGlobos() {
   setInterval(createBallon, 500);
 }
 
-"Álvaro
-"Daniel
-"Guille
-"Alberto
-"Pedro Ángel
-"Alba
-"Alejandro
-"Pablo
-"Antonio
-"David
-"Bea
-"Antonio Carretero
-"Antonio Crepo
-"Samuel
-"Carlos
-"Luis
-"Elena
-"Jose
-"Jorge
-"Manuel
-"Jairo
-"Pedro
-"Antonio
-"Mario
-"Ángel Félix
-"Alex Valero
+
 const monthsElement = document.getElementById('meses');
 const daysElement = document.getElementById('dias');
 const hoursElement = document.getElementById('horas');
