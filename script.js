@@ -6,39 +6,55 @@ const countdownElement = document.getElementById('countdown-container');
 
 let currentDate = new Date();
 let yearGoal = 2023;
-let monthGoal = 3;
-let dayGoal = 1;
+let monthGoal = 8;
+let dayGoal = 27;
 let hourGoal = 0;
 let goalDate = new Date(yearGoal, monthGoal, dayGoal, hourGoal);
-let totalSeconds, hours, days, months;
+let totalSeconds, hours, days;
+
+let months = 0;
 
 let springSeasonStart = 2;
 let summerSeasonStart = 5;
 let autumnSeasonStart = 9;
-let winterSeasonStart = 11
+let winterSeasonStart = 11;
 let currentMonth = currentDate.getMonth();
-//currentMonth = 9;
+currentMonth = 12;
 
 let secondsOfOneHour = 1440000;
 let countdownInterval = setInterval(countdown, secondsOfOneHour);
 
+const segundosEnMinuto = 60;
+const segundosEnHora = 3600;
+const segundosEnDia = 86400;
+const segundosEnAnioPromedio = 31556952;
+
 changeSeasonElements();
-checkYear();
+checkHappened();
 countdown();
 
-function checkYear() {
+function checkHappened() {
   if (goalDate.getTime() < currentDate.getTime()) {
-    goalDate.setFullYear(goalDate.getFullYear() + 1);
+    goalDate.setFullYear(currentDate.getFullYear() + 1);
   }
-}
-
+};
 
 function getTime() {
   totalSeconds = (goalDate - currentDate) / 1000;
-  hours = Math.floor(totalSeconds / 3600) % 24;
-  days = Math.floor(totalSeconds / 3600 / 24) % 30;
-  months = Math.floor(totalSeconds / 3600 / 24 / 30) % 12;
-}
+
+  let anios = Math.floor(totalSeconds / segundosEnAnioPromedio);
+  let segundosRestantes = totalSeconds % segundosEnAnioPromedio;
+
+  let segundosEnMes = segundosEnAnioPromedio / 12;
+  months = Math.floor(segundosRestantes / segundosEnMes);
+  let segundosRestantesMes = segundosRestantes % segundosEnMes;
+
+  days = Math.floor(segundosRestantesMes / segundosEnDia);
+  let segundosRestantesDia = segundosRestantesMes % segundosEnDia;
+
+  hours = Math.floor(segundosRestantesDia / segundosEnHora);
+
+};
 
 function countdown() {
   currentDate = new Date();
@@ -49,10 +65,6 @@ function countdown() {
     currentDate.getMonth() == goalDate.getMonth()) {
     happyBirthday();
     return;
-  } else if (totalSeconds < 0) {
-    yearGoal = yearGoal + 1;
-    goalDate = new Date(yearGoal, 8, 22, 30);
-    getTime();
   }
 
   monthsElement.innerHTML = months;
@@ -108,8 +120,8 @@ function createBallon() {
   setTimeout(() => {
     globo.remove();
   }, 4000);
-}
+};
 
 function soltarGlobos() {
   setInterval(createBallon, 500);
-}
+};
